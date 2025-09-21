@@ -1,156 +1,399 @@
-# Sistema de Finanças Pessoais
+# 💳 Sistema de Finanças Pessoais
 
-Um sistema desktop para controle de finanças pessoais desenvolvido em Java com interface gráfica Swing.
+<div align="center">
 
-## Funcionalidades
+![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java)
+![Maven](https://img.shields.io/badge/Maven-3.6+-blue?style=for-the-badge&logo=apache-maven)
+![MySQL](https://img.shields.io/badge/MySQL-8.0+-blue?style=for-the-badge&logo=mysql)
+![Swing](https://img.shields.io/badge/Swing-Desktop-green?style=for-the-badge&logo=java)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-- **Gestão de Transações**: Adicionar receitas e despesas com descrição, valor, categoria e data
-- **Categorização**: Sistema de categorias para organizar transações
-- **Resumo Financeiro**: Visualização do saldo, receitas e despesas totais
-- **Gráficos**: Gráfico de pizza mostrando a distribuição entre receitas e despesas
-- **Interface Moderna**: Interface gráfica com tema FlatLaf
+**Um sistema desktop moderno e intuitivo para controle completo de suas finanças pessoais**
 
-## Pré-requisitos
+[🚀 Instalação](#-instalação-e-configuração) • [📖 Documentação](#-como-usar) • [🛠️ Tecnologias](#-tecnologias-utilizadas) • [🤝 Contribuição](#-contribuição)
 
-- Java 17 ou superior
-- Maven 3.6 ou superior
-- MySQL 8.0 ou superior
+</div>
 
-## Instalação e Configuração
+---
 
-### 1. Configurar o Banco de Dados
+## 📋 Sobre o Projeto
 
-1. Instale e configure o MySQL
-2. Execute o script SQL para criar o banco e as tabelas:
+O **Sistema de Finanças Pessoais** é uma aplicação desktop desenvolvida em Java que oferece uma solução completa para o gerenciamento de suas finanças pessoais. Com interface moderna e intuitiva, o sistema permite controlar receitas, despesas e visualizar relatórios detalhados de sua situação financeira.
 
-```sql
--- Execute o arquivo src/main/resources/schema.sql no seu MySQL
+### ✨ Principais Características
+
+- 🎨 **Interface Moderna**: Design limpo e profissional com tema FlatLaf
+- 📊 **Visualizações Interativas**: Gráficos responsivos com zoom e tooltips
+- 💰 **Gestão Completa**: Controle total de receitas e despesas
+- 🏷️ **Categorização Inteligente**: Sistema de categorias organizadas por tipo
+- 📈 **Relatórios em Tempo Real**: Resumos financeiros atualizados instantaneamente
+- 🔒 **Dados Seguros**: Armazenamento em banco de dados MySQL
+- ⚡ **Performance Otimizada**: Interface responsiva e fluida
+
+---
+
+## 🚀 Funcionalidades
+
+### 💸 Gestão de Transações
+- ✅ Adicionar receitas e despesas com detalhes completos
+- ✅ Categorização automática baseada no tipo de transação
+- ✅ Validação de dados em tempo real
+- ✅ Histórico completo de transações
+- ✅ Formatação monetária brasileira (R$)
+
+### 📊 Visualizações e Relatórios
+- ✅ **Dashboard Financeiro**: Saldo, receitas e despesas totais
+- ✅ **Gráfico Interativo**: Distribuição visual com zoom e detalhes
+- ✅ **Tooltips Informativos**: Valores e percentuais em tempo real
+- ✅ **Cores Temáticas**: Verde para receitas, vermelho para despesas
+- ✅ **Atualizações Automáticas**: Dados sempre sincronizados
+
+### 🎨 Interface do Usuário
+- ✅ **Design Responsivo**: Adapta-se a diferentes tamanhos de tela
+- ✅ **Tema Moderno**: FlatLaf com cores profissionais
+- ✅ **Navegação Intuitiva**: Tabs organizadas e tooltips
+- ✅ **Feedback Visual**: Animações suaves e transições
+- ✅ **Acessibilidade**: Interface clara e fácil de usar
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Versão | Descrição |
+|------------|--------|-----------|
+| **Java** | 17+ | Linguagem de programação principal |
+| **Swing** | - | Framework para interface gráfica |
+| **FlatLaf** | 3.2+ | Tema moderno para Swing |
+| **JFreeChart** | 1.5+ | Biblioteca para criação de gráficos |
+| **MySQL** | 8.0+ | Banco de dados relacional |
+| **Maven** | 3.6+ | Gerenciamento de dependências |
+| **JDBC** | - | Conectividade com banco de dados |
+
+---
+
+## 📋 Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado:
+
+- ☕ **Java 17 ou superior** ([Download](https://adoptium.net/))
+- 🗄️ **MySQL 8.0 ou superior** ([Download](https://dev.mysql.com/downloads/))
+- 📦 **Maven 3.6 ou superior** ([Download](https://maven.apache.org/download.cgi))
+- 💻 **Sistema Operacional**: Windows, macOS ou Linux
+
+---
+
+## 🚀 Instalação e Configuração
+
+### 1️⃣ Clone o Repositório
+
+```bash
+git clone https://github.com/seu-usuario/sistemas-de-financas-pessoais.git
+cd sistemas-de-financas-pessoais
 ```
 
-### 2. Configurar Conexão com Banco
+### 2️⃣ Configurar o Banco de Dados
 
-Edite o arquivo `src/main/java/com/financaspessoais/database/DatabaseConnection.java` e ajuste as configurações:
+#### Instalar e Configurar MySQL
+1. Instale o MySQL Server
+2. Inicie o serviço MySQL
+3. Acesse o MySQL como root:
+```bash
+mysql -u root -p
+```
+
+#### Criar o Banco de Dados
+```sql
+-- Criar banco de dados
+CREATE DATABASE financas_pessoais;
+USE financas_pessoais;
+
+-- Executar o script de criação das tabelas
+SOURCE src/main/resources/schema.sql;
+```
+
+### 3️⃣ Configurar Conexão
+
+Edite o arquivo `src/main/java/com/financaspessoais/database/DatabaseConnection.java`:
 
 ```java
 private static final String URL = "jdbc:mysql://localhost:3306/financas_pessoais";
-private static final String USER = "seu_usuario";
-private static final String PASSWORD = "sua_senha";
+private static final String USER = "seu_usuario_mysql";
+private static final String PASSWORD = "sua_senha_mysql";
 ```
 
-### 3. Compilar e Executar
+### 4️⃣ Compilar e Executar
 
+#### Opção 1: Via Maven (Recomendado)
 ```bash
 # Compilar o projeto
 mvn clean compile
 
-# Criar JAR executável
-mvn package
+# Executar a aplicação
+mvn exec:java -Dexec.mainClass=com.financaspessoais.App
+```
 
-# Executar o aplicativo
+#### Opção 2: Via Scripts
+```bash
+# Windows
+.\run.bat
+
+# Linux/macOS
+./run.sh
+```
+
+#### Opção 3: JAR Executável
+```bash
+# Criar JAR
+mvn clean package
+
+# Executar JAR
 java -jar target/finance-app-1.0-SNAPSHOT.jar
 ```
 
-Ou executar diretamente via Maven:
+---
 
-```bash
-mvn exec:java -Dexec.mainClass="com.financaspessoais.App"
+## 📖 Como Usar
+
+### 🏠 Tela Principal
+
+A aplicação possui uma interface moderna com duas abas principais:
+
+- **💰 Transações**: Para gerenciar receitas e despesas
+- **📊 Resumo**: Para visualizar relatórios e gráficos
+
+### ➕ Adicionando Transações
+
+1. **Acesse a aba "Transações"**
+2. **Preencha o formulário:**
+   - **Tipo**: Selecione RECEITA ou DESPESA
+   - **Descrição**: Descreva a transação (ex: "Salário", "Supermercado")
+   - **Valor**: Digite o valor (aceita vírgula ou ponto decimal)
+   - **Categoria**: Escolha uma categoria baseada no tipo
+   - **Data**: Data da transação (formato: dd/MM/yyyy)
+3. **Clique em "Adicionar Transação"**
+
+### 📊 Visualizando Relatórios
+
+1. **Acesse a aba "Resumo"**
+2. **Visualize as informações:**
+   - **Saldo Total**: Valor atual (verde = positivo, vermelho = negativo)
+   - **Receitas**: Total de todas as receitas
+   - **Despesas**: Total de todas as despesas
+   - **Gráfico**: Distribuição visual interativa
+
+### 🎯 Interagindo com o Gráfico
+
+- **🖱️ Clique**: Clique em uma seção para ver detalhes
+- **🔍 Zoom**: Use a roda do mouse para zoom in/out
+- **💡 Tooltip**: Passe o mouse para ver informações detalhadas
+- **📱 Responsivo**: Redimensione a janela para adaptar o gráfico
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+📦 sistemas-de-financas-pessoais/
+├── 📄 pom.xml                           # Configuração Maven
+├── 📄 README.md                         # Documentação
+├── 📄 run.bat / run.sh                  # Scripts de execução
+├── 📁 src/
+│   ├── 📁 main/
+│   │   ├── 📁 java/com/financaspessoais/
+│   │   │   ├── 📄 App.java              # Classe principal
+│   │   │   ├── 📁 controller/
+│   │   │   │   └── 📄 FinanceController.java
+│   │   │   ├── 📁 dao/
+│   │   │   │   ├── 📄 CategoriaDAO.java
+│   │   │   │   └── 📄 TransacaoDAO.java
+│   │   │   ├── 📁 database/
+│   │   │   │   └── 📄 DatabaseConnection.java
+│   │   │   ├── 📁 model/
+│   │   │   │   ├── 📄 Categoria.java
+│   │   │   │   └── 📄 Transacao.java
+│   │   │   ├── 📁 util/
+│   │   │   │   ├── 📄 DateUtil.java
+│   │   │   │   └── 📄 ThemeConfig.java
+│   │   │   └── 📁 view/
+│   │   │       ├── 📄 MainFrame.java
+│   │   │       ├── 📄 ResumoPanel.java
+│   │   │       └── 📄 TransacaoPanel.java
+│   │   └── 📁 resources/
+│   │       └── 📄 schema.sql            # Script do banco
+│   └── 📁 test/                         # Testes (futuro)
+└── 📁 target/                           # Arquivos compilados
 ```
 
-## Como Usar
+---
 
-### Adicionando Transações
+## 🏷️ Categorias Padrão
 
-1. Abra a aba "Transações"
-2. Preencha os campos:
-   - **Tipo**: RECEITA ou DESPESA
-   - **Descrição**: Descrição da transação
-   - **Valor**: Valor (use vírgula ou ponto como separador decimal)
-   - **Categoria**: Selecione uma categoria (baseada no tipo)
-   - **Data**: Data da transação (formato dd/MM/yyyy)
-3. Clique em "Adicionar Transação"
+O sistema vem com categorias pré-configuradas para facilitar o uso:
 
-### Visualizando o Resumo
+### 💰 Receitas
+- 💼 **Salário**: Renda do trabalho formal
+- 🎯 **Freelance**: Trabalhos autônomos
+- 📈 **Investimentos**: Dividendos, juros, etc.
+- 🎁 **Presentes**: Dinheiro recebido como presente
+- 💸 **Outros**: Outras fontes de receita
 
-1. Abra a aba "Resumo"
-2. Visualize:
-   - Saldo atual (verde se positivo, vermelho se negativo)
-   - Total de receitas
-   - Total de despesas
-   - Gráfico de distribuição
+### 💸 Despesas
+- 🍽️ **Alimentação**: Supermercado, restaurantes
+- 🏠 **Moradia**: Aluguel, condomínio, IPTU
+- 🚗 **Transporte**: Combustível, transporte público
+- 🎮 **Lazer**: Entretenimento, hobbies
+- 🏥 **Saúde**: Médicos, medicamentos, plano de saúde
+- 📚 **Educação**: Cursos, livros, mensalidades
+- 👕 **Vestuário**: Roupas, calçados, acessórios
+- 💡 **Utilidades**: Luz, água, internet, telefone
 
-## Estrutura do Projeto
+---
 
-```
-src/main/java/com/financaspessoais/
-├── App.java                    # Classe principal
-├── controller/
-│   └── FinanceController.java  # Controlador principal
-├── dao/
-│   ├── CategoriaDAO.java      # Acesso a dados das categorias
-│   └── TransacaoDAO.java      # Acesso a dados das transações
-├── database/
-│   └── DatabaseConnection.java # Configuração de conexão
-├── model/
-│   ├── Categoria.java         # Modelo de categoria
-│   └── Transacao.java         # Modelo de transação
-├── util/
-│   └── DateUtil.java          # Utilitários para datas
-└── view/
-    ├── MainFrame.java         # Janela principal
-    ├── ResumoPanel.java       # Painel de resumo
-    └── TransacaoPanel.java    # Painel de transações
+## 🔧 Solução de Problemas
+
+### ❌ Erro de Conexão com Banco
+
+**Problema**: `java.sql.SQLException: Access denied`
+
+**Soluções**:
+1. ✅ Verifique se o MySQL está rodando
+2. ✅ Confirme as credenciais no `DatabaseConnection.java`
+3. ✅ Certifique-se de que o banco `financas_pessoais` foi criado
+4. ✅ Teste a conexão manualmente:
+```sql
+mysql -u seu_usuario -p financas_pessoais
 ```
 
-## Tecnologias Utilizadas
+### ❌ Erro de Compilação
 
-- **Java 17**: Linguagem de programação
-- **Swing**: Interface gráfica
-- **FlatLaf**: Tema moderno para Swing
-- **JFreeChart**: Biblioteca para gráficos
-- **MySQL**: Banco de dados
-- **Maven**: Gerenciamento de dependências
+**Problema**: `Maven compilation failed`
 
-## Categorias Padrão
+**Soluções**:
+1. ✅ Verifique se o Java 17+ está instalado: `java -version`
+2. ✅ Execute `mvn clean` antes de compilar
+3. ✅ Verifique se o Maven está configurado: `mvn -version`
+4. ✅ Baixe as dependências: `mvn dependency:resolve`
 
-O sistema vem com as seguintes categorias pré-configuradas:
+### ❌ Interface não Carrega
 
-**Receitas:**
-- Salário
-- Freelance
-- Investimentos
+**Problema**: Janela não abre ou aparece em branco
 
-**Despesas:**
-- Alimentação
-- Moradia
-- Transporte
-- Lazer
-- Saúde
-- Educação
+**Soluções**:
+1. ✅ Verifique se todas as dependências foram baixadas
+2. ✅ Execute `mvn clean compile`
+3. ✅ Verifique os logs de erro no console
+4. ✅ Teste com `mvn exec:java -Dexec.mainClass=com.financaspessoais.App`
 
-## Solução de Problemas
+### ❌ Gráfico não Aparece
 
-### Erro de Conexão com Banco
-- Verifique se o MySQL está rodando
-- Confirme as credenciais no `DatabaseConnection.java`
-- Certifique-se de que o banco `financas_pessoais` foi criado
+**Problema**: Gráfico em branco ou com erro
 
-### Erro de Compilação
-- Verifique se o Java 17 está instalado
-- Execute `mvn clean` antes de compilar novamente
+**Soluções**:
+1. ✅ Adicione algumas transações primeiro
+2. ✅ Verifique se há dados no banco
+3. ✅ Reinicie a aplicação
+4. ✅ Verifique se o JFreeChart está funcionando
 
-### Interface não Carrega
-- Verifique se todas as dependências foram baixadas
-- Execute `mvn dependency:resolve`
+---
 
-## Contribuição
+## 🚀 Funcionalidades Futuras
 
-Para contribuir com o projeto:
+- [ ] 📅 **Relatórios por Período**: Filtros por mês, ano, período customizado
+- [ ] 📊 **Mais Tipos de Gráfico**: Barras, linhas, área
+- [ ] 💾 **Backup e Restore**: Exportar/importar dados
+- [ ] 🎯 **Metas Financeiras**: Definir e acompanhar objetivos
+- [ ] 📱 **Versão Web**: Interface web responsiva
+- [ ] 🔄 **Sincronização**: Backup automático na nuvem
+- [ ] 📈 **Análise de Tendências**: Previsões e análises avançadas
+- [ ] 🏦 **Integração Bancária**: Importar extratos automaticamente
+- [ ] 📊 **Relatórios PDF**: Gerar relatórios em PDF
+- [ ] 🌍 **Multi-idioma**: Suporte a diferentes idiomas
 
-1. Faça um fork do repositório
-2. Crie uma branch para sua feature
-3. Commit suas mudanças
-4. Abra um Pull Request
+---
 
-## Licença
+## 🤝 Contribuição
 
-Este projeto está sob a licença MIT.
+Contribuições são sempre bem-vindas! Para contribuir:
+
+### 🔀 Como Contribuir
+
+1. **🍴 Fork** o projeto
+2. **🌿 Crie** uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. **💾 Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. **📤 Push** para a branch (`git push origin feature/AmazingFeature`)
+5. **🔀 Abra** um Pull Request
+
+### 📝 Padrões de Código
+
+- ✅ Use nomes descritivos para variáveis e métodos
+- ✅ Comente código complexo
+- ✅ Siga as convenções do Java
+- ✅ Teste suas mudanças antes de submeter
+- ✅ Mantenha a consistência com o código existente
+
+### 🐛 Reportando Bugs
+
+Ao reportar bugs, inclua:
+- 📱 Sistema operacional e versão
+- ☕ Versão do Java
+- 🗄️ Versão do MySQL
+- 📋 Passos para reproduzir o erro
+- 📸 Screenshots (se aplicável)
+- 📄 Logs de erro completos
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+```
+MIT License
+
+Copyright (c) 2024 Sistema de Finanças Pessoais
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## 👨‍💻 Autor
+
+**Desenvolvedor** - [Aron Alvarenga](https://github.com/aron-alvarenga)
+
+- 💼 LinkedIn: [Aron Alvarenga](https://linkedin.com/in/aron-alvarenga)
+
+---
+
+## 🙏 Agradecimentos
+
+- 🎨 **FlatLaf** - Tema moderno para Swing
+- 📊 **JFreeChart** - Biblioteca de gráficos
+- ☕ **Java Community** - Suporte e recursos
+- 🤝 **Contribuidores** - Todos que ajudaram no projeto
+
+---
+
+<div align="center">
+
+**⭐ Se este projeto foi útil para você, considere dar uma estrela! ⭐**
+
+[⬆️ Voltar ao topo](#-sistema-de-finanças-pessoais)
+
+</div>

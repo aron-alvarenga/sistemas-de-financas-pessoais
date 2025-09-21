@@ -379,16 +379,6 @@ SOFTWARE.
 
 - 💼 LinkedIn: [Aron Alvarenga](https://linkedin.com/in/aron-alvarenga)
 
----
-
-## 🙏 Agradecimentos
-
-- 🎨 **FlatLaf** - Tema moderno para Swing
-- 📊 **JFreeChart** - Biblioteca de gráficos
-- ☕ **Java Community** - Suporte e recursos
-- 🤝 **Contribuidores** - Todos que ajudaram no projeto
-
----
 
 <div align="center">
 

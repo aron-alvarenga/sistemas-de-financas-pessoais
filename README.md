@@ -375,6 +375,14 @@ O sistema vem com categorias pré-configuradas para facilitar o uso:
 
 ---
 
+## Novo Direcionamento
+* **Arquitetura limpa** (MVC/MVP), separação de UI vs domínio vs infra.
+* **Persistência real** com migrations (Flyway) e DAO bem testado.
+* **Exportações** (CSV/PDF), importação, filtros por período.
+* **Observabilidade**: logs e tratamento de erro consistente na UI.
+
+---
+
 ## 🤝 Contribuição
 
 Contribuições são sempre bem-vindas! Para contribuir:

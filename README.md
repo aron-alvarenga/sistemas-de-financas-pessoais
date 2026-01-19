@@ -2,8 +2,9 @@
 
 <div align="center">
 
-![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java)
+![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=java)
 ![Maven](https://img.shields.io/badge/Maven-3.6+-blue?style=for-the-badge&logo=apache-maven)
+![H2](https://img.shields.io/badge/H2-2.2+-blue?style=for-the-badge&logo=h2)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0+-blue?style=for-the-badge&logo=mysql)
 ![Swing](https://img.shields.io/badge/Swing-Desktop-green?style=for-the-badge&logo=java)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
@@ -27,7 +28,8 @@ O **Sistema de Finanças Pessoais** é uma aplicação desktop desenvolvida em J
 - 💰 **Gestão Completa**: Controle total de receitas e despesas
 - 🏷️ **Categorização Inteligente**: Sistema de categorias organizadas por tipo
 - 📈 **Relatórios em Tempo Real**: Resumos financeiros atualizados instantaneamente
-- 🔒 **Dados Seguros**: Armazenamento em banco de dados MySQL
+- 🔒 **Dados Seguros**: Armazenamento em banco de dados (H2 em memória para desenvolvimento, MySQL para produção)
+- 🚀 **Desenvolvimento Simplificado**: Banco H2 em memória configurado automaticamente
 - ⚡ **Performance Otimizada**: Interface responsiva e fluida
 
 ---
@@ -61,13 +63,42 @@ O **Sistema de Finanças Pessoais** é uma aplicação desktop desenvolvida em J
 
 | Tecnologia | Versão | Descrição |
 |------------|--------|-----------|
-| **Java** | 17+ | Linguagem de programação principal |
+| **Java** | 21 | Linguagem de programação principal |
 | **Swing** | - | Framework para interface gráfica |
-| **FlatLaf** | 3.2+ | Tema moderno para Swing |
+| **FlatLaf** | 2.4+ | Tema moderno para Swing |
 | **JFreeChart** | 1.5+ | Biblioteca para criação de gráficos |
-| **MySQL** | 8.0+ | Banco de dados relacional |
+| **H2 Database** | 2.2+ | Banco de dados em memória (desenvolvimento) |
+| **MySQL** | 8.0+ | Banco de dados relacional (produção) |
 | **Maven** | 3.6+ | Gerenciamento de dependências |
 | **JDBC** | - | Conectividade com banco de dados |
+
+---
+
+## 🗄️ Banco de Dados
+
+O projeto suporta dois bancos de dados, configuráveis através de uma flag simples:
+
+### 🚀 H2 Database (Desenvolvimento - Padrão)
+
+O **H2 Database em memória** é usado por padrão para desenvolvimento, oferecendo:
+
+- ✅ **Zero Configuração**: Funciona imediatamente após clonar o repositório
+- ✅ **Rápido**: Banco em memória com performance excelente
+- ✅ **Automático**: Schema e dados iniciais criados automaticamente
+- ✅ **Isolado**: Cada execução começa com um banco limpo
+- ✅ **Ideal para Testes**: Perfeito para desenvolvimento e testes
+
+**Como usar**: Simplesmente execute a aplicação! O H2 é configurado automaticamente.
+
+### 🏭 MySQL (Produção - Opcional)
+
+O **MySQL** pode ser usado para produção quando você precisa de persistência de dados:
+
+- ✅ **Persistência**: Dados salvos permanentemente
+- ✅ **Produção**: Ideal para ambientes de produção
+- ✅ **Backup**: Facilita backup e restauração de dados
+
+**Como usar**: Configure `USE_H2 = false` em `DatabaseConnection.java` e configure suas credenciais MySQL.
 
 ---
 
@@ -75,10 +106,11 @@ O **Sistema de Finanças Pessoais** é uma aplicação desktop desenvolvida em J
 
 Antes de começar, certifique-se de ter instalado:
 
-- ☕ **Java 17 ou superior** ([Download](https://adoptium.net/))
-- 🗄️ **MySQL 8.0 ou superior** ([Download](https://dev.mysql.com/downloads/))
+- ☕ **Java 21 ou superior** ([Download](https://adoptium.net/))
 - 📦 **Maven 3.6 ou superior** ([Download](https://maven.apache.org/download.cgi))
 - 💻 **Sistema Operacional**: Windows, macOS ou Linux
+
+> **💡 Nota**: Para desenvolvimento, o projeto usa **H2 Database em memória**, que é configurado automaticamente. Não é necessário instalar MySQL para começar a desenvolver. O MySQL é opcional e usado apenas para produção.
 
 ---
 
@@ -91,7 +123,30 @@ git clone https://github.com/seu-usuario/sistemas-de-financas-pessoais.git
 cd sistemas-de-financas-pessoais
 ```
 
-### 2️⃣ Configurar o Banco de Dados
+### 2️⃣ Compilar e Executar (Desenvolvimento com H2)
+
+O projeto está configurado para usar **H2 Database em memória** por padrão, o que significa que você pode começar a desenvolver imediatamente sem configurar nenhum banco de dados!
+
+O banco H2 é criado automaticamente quando a aplicação inicia, incluindo:
+- ✅ Criação automática das tabelas
+- ✅ Inserção das categorias padrão
+- ✅ Configuração completa do schema
+
+**Simplesmente execute:**
+
+```bash
+# Compilar o projeto
+mvn clean compile
+
+# Executar a aplicação
+mvn exec:java -Dexec.mainClass=com.financaspessoais.App
+```
+
+> **💡 Nota**: Os dados no H2 em memória são temporários e serão perdidos quando a aplicação for fechada. Isso é ideal para desenvolvimento e testes.
+
+### 3️⃣ Configurar MySQL (Opcional - Produção)
+
+Se você quiser usar MySQL para persistência de dados, siga estes passos:
 
 #### Instalar e Configurar MySQL
 1. Instale o MySQL Server
@@ -111,17 +166,21 @@ USE financas_pessoais;
 SOURCE src/main/resources/schema.sql;
 ```
 
-### 3️⃣ Configurar Conexão
+#### Alterar para MySQL no Código
 
-Edite o arquivo `src/main/java/com/financaspessoais/database/DatabaseConnection.java`:
+Edite o arquivo `src/main/java/com/financaspessoais/database/DatabaseConnection.java` e altere:
 
 ```java
-private static final String URL = "jdbc:mysql://localhost:3306/financas_pessoais";
-private static final String USER = "seu_usuario_mysql";
-private static final String PASSWORD = "sua_senha_mysql";
+// Mude de true para false para usar MySQL
+private static final boolean USE_H2 = false;
+
+// Configure suas credenciais MySQL
+private static final String MYSQL_URL = "jdbc:mysql://localhost:3306/financas_pessoais";
+private static final String MYSQL_USER = "seu_usuario_mysql";
+private static final String MYSQL_PASSWORD = "sua_senha_mysql";
 ```
 
-### 4️⃣ Compilar e Executar
+### 4️⃣ Executar a Aplicação
 
 #### Opção 1: Via Maven (Recomendado)
 ```bash
@@ -149,6 +208,8 @@ mvn clean package
 # Executar JAR
 java -jar target/finance-app-1.0-SNAPSHOT.jar
 ```
+
+> **🚀 Dica**: Com H2 em memória, você pode executar a aplicação imediatamente após clonar o repositório, sem nenhuma configuração adicional!
 
 ---
 
@@ -253,23 +314,26 @@ O sistema vem com categorias pré-configuradas para facilitar o uso:
 
 ### ❌ Erro de Conexão com Banco
 
-**Problema**: `java.sql.SQLException: Access denied`
+**Problema**: `java.sql.SQLException: Access denied` ou erro de conexão
 
 **Soluções**:
-1. ✅ Verifique se o MySQL está rodando
-2. ✅ Confirme as credenciais no `DatabaseConnection.java`
-3. ✅ Certifique-se de que o banco `financas_pessoais` foi criado
-4. ✅ Teste a conexão manualmente:
-```sql
-mysql -u seu_usuario -p financas_pessoais
-```
+1. ✅ **Para desenvolvimento**: Use H2 em memória (padrão). Verifique se `USE_H2 = true` em `DatabaseConnection.java`
+2. ✅ **Para produção com MySQL**:
+   - Verifique se o MySQL está rodando
+   - Confirme as credenciais no `DatabaseConnection.java`
+   - Certifique-se de que o banco `financas_pessoais` foi criado
+   - Teste a conexão manualmente:
+   ```sql
+   mysql -u seu_usuario -p financas_pessoais
+   ```
+3. ✅ Se estiver usando H2, o banco é criado automaticamente - nenhuma configuração necessária!
 
 ### ❌ Erro de Compilação
 
 **Problema**: `Maven compilation failed`
 
 **Soluções**:
-1. ✅ Verifique se o Java 17+ está instalado: `java -version`
+1. ✅ Verifique se o Java 21+ está instalado: `java -version`
 2. ✅ Execute `mvn clean` antes de compilar
 3. ✅ Verifique se o Maven está configurado: `mvn -version`
 4. ✅ Baixe as dependências: `mvn dependency:resolve`
@@ -335,8 +399,8 @@ Contribuições são sempre bem-vindas! Para contribuir:
 
 Ao reportar bugs, inclua:
 - 📱 Sistema operacional e versão
-- ☕ Versão do Java
-- 🗄️ Versão do MySQL
+- ☕ Versão do Java (deve ser 21+)
+- 🗄️ Banco de dados usado (H2 ou MySQL)
 - 📋 Passos para reproduzir o erro
 - 📸 Screenshots (se aplicável)
 - 📄 Logs de erro completos
